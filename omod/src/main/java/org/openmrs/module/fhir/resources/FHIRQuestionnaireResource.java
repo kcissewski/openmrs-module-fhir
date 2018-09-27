@@ -20,6 +20,10 @@ public class FHIRQuestionnaireResource {
         return getQuestionnaireService().createQuestionnaire(questionnaire);
     }
 
+    public Questionnaire updateQuestionnaire(Questionnaire questionnaire, String uuid) {
+        return getQuestionnaireService().updateQuestionnaire(questionnaire, uuid);
+    }
+
     private QuestionnaireService getQuestionnaireService() {
         return Context.getService(QuestionnaireService.class);
     }

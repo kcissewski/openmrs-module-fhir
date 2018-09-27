@@ -7,4 +7,6 @@ public interface GenericQuestionnaireStrategy {
     Questionnaire getQuestionnaire(String uuid);
 
     Questionnaire createQuestionnaire(Questionnaire questionnaire);
+
+    Questionnaire updateQuestionnaire(Questionnaire questionnaire, String uuid);
 }

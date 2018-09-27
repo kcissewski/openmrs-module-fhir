@@ -63,6 +63,19 @@ public final class FHIRQuestionnaireUtil {
         return form;
     }
 
+    public static Form updateForm(Form newForm, Form formToUpdate) {
+        formToUpdate.setName(newForm.getName());
+        formToUpdate.setVersion(newForm.getVersion());
+        formToUpdate.setPublished(newForm.getPublished());
+        formToUpdate.setDescription(newForm.getDescription());
+        formToUpdate.setBuild(newForm.getBuild());
+        formToUpdate.setEncounterType(newForm.getEncounterType());
+        formToUpdate.setFormFields(newForm.getFormFields());
+        formToUpdate.setRetired(newForm.getRetired());
+
+        return formToUpdate;
+    }
+
 //region OpenMRS Methods
     private static void setFormStatuses(Form form, final Enumerations.PublicationStatus publicationStatus) {
         switch (publicationStatus) {
