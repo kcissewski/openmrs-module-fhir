@@ -101,6 +101,10 @@ public class FHIRUtils {
 		return Context.getAdministrationService().getGlobalProperty("fhir.patient.patientStrategy");
 	}
 
+	public static String getQuestionnaireStrategy() {
+		return Context.getAdministrationService().getGlobalProperty("fhir.questionnaire.questionnaireStrategy");
+	}
+
 	public static String getRelatedPersonStrategy() {
 		return Context.getAdministrationService().getGlobalProperty("fhir.relatedPerson.relatedPersonStrategy");
 	}

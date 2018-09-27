@@ -181,6 +181,15 @@
     <bean parent="serviceContext">
         <property name="moduleService">
             <list>
+                <value>${project.parent.groupId}.${project.parent.artifactId}.api.QuestionnaireService</value>
+                <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.QuestionnaireServiceImpl"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean parent="serviceContext">
+        <property name="moduleService">
+            <list>
                 <value>${project.parent.groupId}.${project.parent.artifactId}.api.FamilyMemberHistoryService</value>
                 <bean
                         class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">

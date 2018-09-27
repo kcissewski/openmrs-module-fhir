@@ -172,6 +172,12 @@
     </globalProperty>
 
     <globalProperty>
+        <property>${project.parent.artifactId}.questionnaire.questionnaireStrategy</property>
+        <defaultValue>DefaultQuestionnaireStrategy</defaultValue>
+        <description>Set questionnaire strategy</description>
+    </globalProperty>
+
+    <globalProperty>
         <property>${project.parent.artifactId}.patient.patientStrategy</property>
         <defaultValue>DefaultPatientStrategy</defaultValue>
         <description>Set patient strategy.</description>
