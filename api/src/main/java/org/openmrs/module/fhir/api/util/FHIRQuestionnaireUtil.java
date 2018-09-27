@@ -9,8 +9,12 @@ import org.openmrs.Concept;
 import org.openmrs.FieldAnswer;
 import org.openmrs.Form;
 import org.openmrs.FormField;
+import org.openmrs.User;
+import org.openmrs.api.UserService;
+import org.openmrs.api.context.Context;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -45,6 +49,47 @@ public final class FHIRQuestionnaireUtil {
         return questionnaire;
     }
 
+    public static Form generateForm(Questionnaire questionnaire) {
+        Form form = new Form();
+
+        form.setName(questionnaire.getName());
+        form.setVersion(questionnaire.getVersion());
+        form.setPublished(questionnaire.getApprovalDate() != null);
+        setFormStatuses(form, questionnaire.getStatus());
+        form.setDescription(questionnaire.getDescription());
+        form.setCreator(getUserByUsername(questionnaire.getPublisher()));
+        form.setDateCreated(new Date());
+
+        return form;
+    }
+
+//region OpenMRS Methods
+    private static void setFormStatuses(Form form, final Enumerations.PublicationStatus publicationStatus) {
+        switch (publicationStatus) {
+            case RETIRED:
+                form.setPublished(true);
+                form.setRetired(true);
+                break;
+            case ACTIVE:
+                form.setPublished(true);
+                form.setRetired(false);
+                break;
+            case DRAFT:
+            case UNKNOWN:
+            case NULL:
+            default:
+                form.setPublished(false);
+                form.setRetired(false);
+                break;
+        }
+    }
+
+    private static User getUserByUsername(String username) {
+        return Context.getUserService().getUserByUsername(username);
+    }
+//endregion
+
+// region FHIR Methods
     private static Enumerations.PublicationStatus getQuestionnaireStatus(Form form) {
         boolean published = form.getPublished();
         boolean retired = form.getRetired();
@@ -95,4 +140,5 @@ public final class FHIRQuestionnaireUtil {
 
         return extensions;
     }
+//endregion
 }

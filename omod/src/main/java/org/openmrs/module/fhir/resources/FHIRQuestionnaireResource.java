@@ -16,6 +16,10 @@ public class FHIRQuestionnaireResource {
         return questionnaire;
     }
 
+    public Questionnaire createQuestionnaire(Questionnaire questionnaire) {
+        return getQuestionnaireService().createQuestionnaire(questionnaire);
+    }
+
     private QuestionnaireService getQuestionnaireService() {
         return Context.getService(QuestionnaireService.class);
     }

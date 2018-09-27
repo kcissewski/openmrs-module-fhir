@@ -11,4 +11,9 @@ public class QuestionnaireServiceImpl extends BaseOpenmrsService implements Ques
     public Questionnaire getQuestionnaire(String uuid) {
         return QuestionnaireStrategyUtil.getQuestionnaireStrategy().getQuestionnaire(uuid);
     }
+
+    @Override
+    public Questionnaire createQuestionnaire(Questionnaire questionnaire) {
+        return QuestionnaireStrategyUtil.getQuestionnaireStrategy().createQuestionnaire(questionnaire);
+    }
 }
