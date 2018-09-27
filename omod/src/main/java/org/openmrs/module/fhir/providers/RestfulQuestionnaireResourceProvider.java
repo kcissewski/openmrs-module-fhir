@@ -1,6 +1,7 @@
 package org.openmrs.module.fhir.providers;
 
 import ca.uhn.fhir.rest.annotation.Create;
+import ca.uhn.fhir.rest.annotation.Delete;
 import ca.uhn.fhir.rest.annotation.IdParam;
 import ca.uhn.fhir.rest.annotation.Read;
 import ca.uhn.fhir.rest.annotation.ResourceParam;
@@ -47,6 +48,11 @@ public class RestfulQuestionnaireResourceProvider implements IResourceProvider {
     public MethodOutcome updateQuestionnaire(@ResourceParam Questionnaire questionnaire, @IdParam IdType id) {
         Questionnaire updatedQuestionnaire = questionnaireResource.updateQuestionnaire(questionnaire, id.getIdPart());
         return createMethodOutcome(updatedQuestionnaire.getId(), SUCCESSFUL_UPDATE_MESSAGE);
+    }
+
+    @Delete
+    public void deleteQuestionnaire(@IdParam IdType id) {
+        questionnaireResource.deleteQuestionnaire(id.getIdPart());
     }
 
     private MethodOutcome createMethodOutcome(String resourceId, String messagePattern) {

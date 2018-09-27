@@ -1,5 +1,6 @@
 package org.openmrs.module.fhir.api.strategies.questionnaire;
 
+import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Questionnaire;
@@ -46,6 +47,21 @@ public class QuestionnaireStrategy implements GenericQuestionnaireStrategy {
         Form form = getFormService().getFormByUuid(uuid);
 
         return form != null ? updateForm(questionnaire, form) : createQuestionnaire(questionnaire, uuid);
+    }
+
+    @Override
+    public void deleteQuestionnaire(String uuid) {
+        Form form = getFormService().getFormByUuid(uuid);
+
+        if (form == null) {
+            throw new ResourceNotFoundException(new IdType(Questionnaire.class.getSimpleName(), uuid));
+        }
+        try {
+            getFormService().purgeForm(form);
+        } catch (APIException e) {
+            throw new UnprocessableEntityException(
+                    "The request cannot be processed due to the following issues \n" + e.getMessage());
+        }
     }
 
     private Questionnaire createQuestionnaire(Questionnaire questionnaire, String uuid) {

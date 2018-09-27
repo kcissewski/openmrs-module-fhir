@@ -9,4 +9,6 @@ public interface QuestionnaireService {
     Questionnaire createQuestionnaire(Questionnaire questionnaire);
 
     Questionnaire updateQuestionnaire(Questionnaire questionnaire, String uuid);
+
+    void deleteQuestionnaire(String uuid);
 }

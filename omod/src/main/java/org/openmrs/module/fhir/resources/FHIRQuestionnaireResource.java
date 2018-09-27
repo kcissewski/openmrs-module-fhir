@@ -24,6 +24,10 @@ public class FHIRQuestionnaireResource {
         return getQuestionnaireService().updateQuestionnaire(questionnaire, uuid);
     }
 
+    public void deleteQuestionnaire(String uuid) {
+        getQuestionnaireService().deleteQuestionnaire(uuid);
+    }
+
     private QuestionnaireService getQuestionnaireService() {
         return Context.getService(QuestionnaireService.class);
     }
